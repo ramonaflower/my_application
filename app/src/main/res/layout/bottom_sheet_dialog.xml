@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@drawable/shape_rectangle_with_round_corner"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button_take_picture_from_camera"
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:text="Chup anh" />
+
+        <View
+            android:background="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <Button
+            android:background="@color/colorWhite"
+            android:id="@+id/button_choose_image_from_gallery"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Chon tu Album" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_rectangle_with_round_corner"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textAllCaps="false"
+        android:text="Cancel" />
+</LinearLayout>
