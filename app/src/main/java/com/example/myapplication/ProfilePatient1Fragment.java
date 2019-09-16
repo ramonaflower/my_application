@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +15,6 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,26 +25,20 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -80,7 +74,7 @@ public class ProfilePatient1Fragment extends Fragment {
     @BindView(R.id.spinner_choose_cancer_stage)
     Spinner mChooseCancerStageSpinner;
     @BindView(R.id.edit_text_input_detail_other_disease)
-    EditText mDetailOtherDieaseEdittext;
+    EditText mDetailOtherDiseaseEdittext;
     @BindView(R.id.linearLayout_pick_image_insurance)
     LinearLayout mPickImageInsuranceLinearLayout;
     @BindView(R.id.image_view_first_image_insurance)
@@ -113,25 +107,37 @@ public class ProfilePatient1Fragment extends Fragment {
 
     private void setupView() {
         // setup data for spinner choose blood type.
-        List<String> listBloodType = new ArrayList<>();
-        ArrayAdapter<String> bloodTypeAdapter = new ArrayAdapter<>(requireActivity(),
-                android.R.layout.simple_spinner_item, listBloodType);
+        String[] stringArrayBloodType = requireActivity().getResources().getStringArray(R.array.blood_type);
+        HintAdapter bloodTypeAdapter = new HintAdapter(requireActivity(), android.R.layout.simple_spinner_item);
+        // Add data to adapter
+        for (String string : stringArrayBloodType){
+            bloodTypeAdapter.add(string);
+        }
         bloodTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseBloodTypeSpinner.setAdapter(bloodTypeAdapter);
+        mChooseBloodTypeSpinner.setSelection(bloodTypeAdapter.getCount());
 
         // setup data for spinner choose cancer stage.
-        String[] listCancerStage = requireActivity().getResources().getStringArray(R.array.cancer_stage);
-        ArrayAdapter<String> cancerStageAdapter = new ArrayAdapter<>(requireActivity(),
-                android.R.layout.simple_spinner_item, listCancerStage);
+        String[] stringArrayCancerStage = requireActivity().getResources().getStringArray(R.array.cancer_stage);
+        HintAdapter cancerStageAdapter = new HintAdapter(requireActivity(), android.R.layout.simple_spinner_item);
+        // Add data to adapter
+        for (String string : stringArrayCancerStage){
+            cancerStageAdapter.add(string);
+        }
         cancerStageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseCancerStageSpinner.setAdapter(cancerStageAdapter);
+        mChooseCancerStageSpinner.setSelection(cancerStageAdapter.getCount());
 
         // setup data for spinner choose cancer type.
-        String[] listFakeCancerType = requireActivity().getResources().getStringArray(R.array.fake_cancer_type);
-        ArrayAdapter<String> cancerTypeAdapter = new ArrayAdapter<>(requireActivity(),
-                android.R.layout.simple_spinner_item, listFakeCancerType);
+        String[] stringArrayCancerType = requireActivity().getResources().getStringArray(R.array.fake_cancer_type);
+        HintAdapter cancerTypeAdapter = new HintAdapter(requireActivity(), android.R.layout.simple_spinner_item);
+        // Add data to adapter
+        for (String string : stringArrayCancerType){
+            cancerTypeAdapter.add(string);
+        }
         cancerTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseCancerTypeSpinner.setAdapter(cancerTypeAdapter);
+        mChooseCancerTypeSpinner.setSelection(cancerTypeAdapter.getCount());
     }
 
     @OnClick(R.id.text_view_patient_date_of_birth)
@@ -183,13 +189,14 @@ public class ProfilePatient1Fragment extends Fragment {
             if (data != null && data.getData() != null) {
                 Uri imageUri = data.getData();
                 try {
-                    mFirstImageInsurancePath = imageUri.getPath();
                     Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
-                    Glide.with(requireActivity()).load(bitmapImage).into(mFirstImageInsuranceImageView);
-                    if (checkImageSize(imageUri)) {
-
+                    if (checkImageSize(bitmapImage)) {
+                        mIsFirstImageInsurancePicked = true;
+                        mFirstImageInsurancePath = imageUri.getPath();
+                        Glide.with(requireActivity()).load(bitmapImage).into(mFirstImageInsuranceImageView);
                     } else {
-                        Toast.makeText(requireActivity(), "File vuot qua 3m", Toast.LENGTH_SHORT).show();
+                        mIsFirstImageInsurancePicked = false;
+                        showDialogCantRegisterImageInsurance();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -200,13 +207,14 @@ public class ProfilePatient1Fragment extends Fragment {
             if (data != null && data.getData() != null) {
                 Uri imageUri = data.getData();
                 try {
-                    mSecondImageInsurancePath = imageUri.getPath();
                     Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
-                    Glide.with(requireActivity()).load(bitmapImage).into(mSecondImageInsuranceImageView);
-                    if (checkImageSize(imageUri)) {
-
+                    if (checkImageSize(bitmapImage)) {
+                        mIsSecondImageInsurancePicked = true;
+                        mSecondImageInsurancePath = imageUri.getPath();
+                        Glide.with(requireActivity()).load(bitmapImage).into(mSecondImageInsuranceImageView);
                     } else {
-                        Toast.makeText(requireActivity(), "File vuot qua 3m", Toast.LENGTH_SHORT).show();
+                        mIsSecondImageInsurancePicked = false;
+                        showDialogCantRegisterImageInsurance();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -215,15 +223,31 @@ public class ProfilePatient1Fragment extends Fragment {
         }
     }
 
-    private boolean checkImageSize(Uri uriImage) {
+    private void showDialogCantRegisterImageInsurance() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setMessage("File vuot qua 3m!");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ok", (dialog, id) -> dialog.cancel());
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
-        return false;
+    private boolean checkImageSize(Bitmap bitmapImage) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] imageInByte = stream.toByteArray();
+        long sizeOfImageInKb = imageInByte.length / 1024; //Image size
+        final long maximumSize = 3072;
+        if (sizeOfImageInKb > maximumSize) {
+            return false;
+        }
+        return true;
     }
 
 
     private void showFullSizeOfImage(String path) {
         Intent intent = new Intent(requireActivity(), DetailImageInsuranceActivity.class);
-        intent.putExtra("full_size_image", path);
+        intent.putExtra(Constants.EXTRA_FULL_SIZE_IMAGE, path);
         startActivity(intent);
     }
 
@@ -236,40 +260,52 @@ public class ProfilePatient1Fragment extends Fragment {
     private void reduceSizeOfImage(String imagePath) {
         Bitmap imageBitmap = BitmapFactory.decodeFile(imagePath);
         int imageHeight = imageBitmap.getHeight();
-        final int requireHeight = 2560;
-        if (imageHeight > requireHeight) {
-            Bitmap resizedBitmap = scaleToFitWidth(imageBitmap, requireHeight);
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            // Compress the image further
-            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bytes);
-            // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
-            File resizedFile = null;
-            try {
-                resizedFile = createImageFile();
-                FileOutputStream fos = new FileOutputStream(resizedFile);
-// Write the bytes of the bitmap to file
-                fos.write(bytes.toByteArray());
-                fos.close();
-                switch (mImageInsuranceIndex) {
-                    case 1:
-                        mFirstImageInsurancePath = resizedFile.getAbsolutePath();
-                        break;
-                    case 2:
-                        mSecondImageInsurancePath = resizedFile.getAbsolutePath();
-                        break;
-                    default:
-                        break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        int imageWidth = imageBitmap.getWidth();
+        final int requireSize = 2560;
+        if (imageHeight > imageWidth) {
+            if (imageHeight > requireSize) {
+                Bitmap resizedBitmap = scaleToFitHeight(imageBitmap, requireSize);
+                saveResizedFile(resizedBitmap);
             }
-            // Write the bytes of the bitmap to file
+        } else {
+            if (imageWidth > requireSize) {
+                Bitmap resizedBitmap = scaleToFitWidth(imageBitmap, requireSize);
+                saveResizedFile(resizedBitmap);
+            }
+        }
+    }
+
+    private void saveResizedFile(Bitmap resizedBitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bytes);
+        try {
+            File resizedFile = createImageFile();
+            FileOutputStream fos = new FileOutputStream(resizedFile);
+            fos.write(bytes.toByteArray());
+            fos.close();
+            switch (mImageInsuranceIndex) {
+                case 1:
+                    mFirstImageInsurancePath = resizedFile.getAbsolutePath();
+                    break;
+                case 2:
+                    mSecondImageInsurancePath = resizedFile.getAbsolutePath();
+                    break;
+                default:
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private static Bitmap scaleToFitWidth(Bitmap b, int width) {
         float factor = width / (float) b.getWidth();
         return Bitmap.createScaledBitmap(b, width, (int) (b.getHeight() * factor), true);
+    }
+
+    private static Bitmap scaleToFitHeight(Bitmap b, int height) {
+        float factor = height / (float) b.getHeight();
+        return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factor), height, true);
     }
 
     @Override
@@ -279,15 +315,11 @@ public class ProfilePatient1Fragment extends Fragment {
             boolean readExternalFile = grantResults[1] == PackageManager.PERMISSION_GRANTED;
             if (cameraPermission && readExternalFile) {
                 requestCamera();
-            } else {
-                Toast.makeText(requireActivity(), "Permission camera is denied!", Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == Constants.REQUEST_PERMISSIONS_CODE_READ_EXTERNAL_STORAGE) {
             if (permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 requestGallery();
-            } else {
-                Toast.makeText(requireActivity(), "Permission access external storage is denied!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -342,7 +374,7 @@ public class ProfilePatient1Fragment extends Fragment {
     }
 
     private String generateImageFileName() {
-        return new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        return new SimpleDateFormat(getString(R.string.image_name_format), Locale.getDefault()).format(new Date());
     }
 
     private void requestGallery() {

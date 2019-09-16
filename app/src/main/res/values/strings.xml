@@ -5,11 +5,13 @@
         <item>@string/blood_type_b</item>
         <item>@string/blood_type_o</item>
         <item>@string/blood_type_ab</item>
+        <item>@string/blood_type_hint</item>
     </string-array>
     <string name="blood_type_a">A型</string>
     <string name="blood_type_b">B型</string>
     <string name="blood_type_o">O型</string>
     <string name="blood_type_ab">AB型</string>
+    <string name="blood_type_hint">Please choose</string>
 
     <string-array name="cancer_stage">
         <item>@string/cancer_stage_0</item>
@@ -17,12 +19,14 @@
         <item>@string/cancer_stage_2</item>
         <item>@string/cancer_stage_3</item>
         <item>@string/cancer_stage_4</item>
+        <item>@string/cancer_stage_hint</item>
     </string-array>
     <string name="cancer_stage_0">0</string>
     <string name="cancer_stage_1">I</string>
     <string name="cancer_stage_2">II</string>
     <string name="cancer_stage_3">III</string>
     <string name="cancer_stage_4">IV</string>
+    <string name="cancer_stage_hint">Please choose</string>
 
     <string-array name="fake_cancer_type">
         <item>@string/cancer_type_0</item>
@@ -30,12 +34,14 @@
         <item>@string/cancer_type_2</item>
         <item>@string/cancer_type_3</item>
         <item>@string/cancer_type_4</item>
+        <item>@string/cancer_type_hint</item>
     </string-array>
     <string name="cancer_type_0">cancer 0</string>
     <string name="cancer_type_1">cancer 1</string>
     <string name="cancer_type_2">cancer 2</string>
     <string name="cancer_type_3">cancer 3</string>
     <string name="cancer_type_4">cancer 4</string>
+    <string name="cancer_type_hint">Please choose</string>
 
     <string name="date_of_birth_text_format">%d/%d/%d</string>
 
@@ -67,4 +73,5 @@
     <string name="profile_insurance">保険証など</string>
     <string name="profile_save">保存する</string>
     <string name="file_provider">com.example.myapplication.fileprovider</string>
+    <string name="image_name_format">yyyyMMdd_HHmmss</string>
 </resources>

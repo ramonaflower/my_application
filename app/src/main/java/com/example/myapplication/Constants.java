@@ -7,4 +7,5 @@ public class Constants {
     public static final int REQUEST_CODE_CAPTURE_SECOND_IMAGE_INSURANCE = 24;
     public static final int REQUEST_CODE_TAKE_FIRST_IMAGE_INSURANCE_FROM_GALLERY = 25;
     public static final int REQUEST_CODE_TAKE_SECOND_IMAGE_INSURANCE_FROM_GALLERY = 26;
+    public static final String EXTRA_FULL_SIZE_IMAGE = "full_size_image";
 }
