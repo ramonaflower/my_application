@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupView() {
         mListFragment.clear();
-        mListFragment.add(new ProfilePatient1Fragment());
-        mListFragment.add(new ProfilePatient1Fragment());
-        mListFragment.add(new ProfilePatient1Fragment());
+        mListFragment.add(new ProfileFragment());
+        mListFragment.add(new ProfileFragment());
+        mListFragment.add(new ProfileFragment());
         mViewpagerAdapter = new ProfileViewPagerAdapter(getSupportFragmentManager(), this, mListFragment);
         mViewPagerProfilePatient.setAdapter(mViewpagerAdapter);
         mTabLayoutTitle.setupWithViewPager(mViewPagerProfilePatient);

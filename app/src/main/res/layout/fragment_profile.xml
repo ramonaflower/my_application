@@ -32,7 +32,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edittext_input_patient_name"
+            android:id="@+id/edittext_profile_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -42,6 +42,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/shape_edittext"
             android:hint="@string/profile_name_hint"
+            android:autofillHints="username"
             android:inputType="text" />
 
         <TextView
@@ -55,7 +56,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_view_patient_date_of_birth"
+            android:id="@+id/text_view_profile_date_of_birth"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -78,7 +79,7 @@
             android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/radio_group_gender"
+            android:id="@+id/radio_group_profile_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -87,13 +88,13 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radio_button_male"
+                android:id="@+id/radio_button_profile_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_male" />
 
             <RadioButton
-                android:id="@+id/radio_button_female"
+                android:id="@+id/radio_button_profile_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -112,7 +113,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spinner_choose_blood_type"
+            android:id="@+id/spinner_profile_blood_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -145,7 +146,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edit_text_input_patient_height"
+                    android:id="@+id/edit_text_profile_height"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
@@ -169,7 +170,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edit_text_input_patient_weight"
+                    android:id="@+id/edit_text_profile_weight"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
@@ -201,13 +202,13 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkbox_allergy_medicine"
+                android:id="@+id/checkbox_profile_allergy_medicine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_medicine" />
 
             <CheckBox
-                android:id="@+id/checkbox_allergy_food"
+                android:id="@+id/checkbox_profile_allergy_food"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -215,7 +216,7 @@
                 android:text="@string/profile_food" />
 
             <CheckBox
-                android:id="@+id/checkbox_other_allergy"
+                android:id="@+id/checkbox_profile_other_allergy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -224,7 +225,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/edit_text_input_detail_other_allergy"
+            android:id="@+id/edit_text_profile_other_allergy"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -263,7 +264,7 @@
         </LinearLayout>
 
         <Spinner
-            android:id="@+id/spinner_choose_cancer_type"
+            android:id="@+id/spinner_profile_cancer_type"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -284,7 +285,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spinner_choose_cancer_stage"
+            android:id="@+id/spinner_profile_cancer_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -305,7 +306,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edit_text_input_detail_other_disease"
+            android:id="@+id/edit_text_profile_other_disease"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -328,7 +329,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/linearLayout_pick_image_insurance"
+            android:id="@+id/linearLayout_profile_pick_image_insurance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -340,7 +341,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/image_view_first_image_insurance"
+                android:id="@+id/image_view_profile_first_image_insurance"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_width="150dp"
@@ -348,7 +349,7 @@
                 android:src="@drawable/ic_image" />
 
             <ImageView
-                android:id="@+id/image_view_second_image_insurance"
+                android:id="@+id/image_view_profile_second_image_insurance"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="150dp"
@@ -357,7 +358,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button_save"
+            android:id="@+id/button_profile_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"

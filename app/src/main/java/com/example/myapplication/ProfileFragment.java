@@ -24,7 +24,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -43,46 +43,44 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProfilePatient1Fragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    @BindView(R.id.edittext_input_patient_name)
-    EditText mPatientNameEdittext;
-    @BindView(R.id.text_view_patient_date_of_birth)
-    TextView mPatientDateOfBirthTextView;
-    @BindView(R.id.radio_group_gender)
-    RadioGroup mGenderRadioGroup;
-    @BindView(R.id.radio_button_male)
-    RadioButton mMaleRadioButton;
-    @BindView(R.id.radio_button_female)
-    RadioButton mFemaleRadioButton;
-    @BindView(R.id.spinner_choose_blood_type)
-    Spinner mChooseBloodTypeSpinner;
-    @BindView(R.id.edit_text_input_patient_height)
-    EditText mPatientHeightEdittext;
-    @BindView(R.id.edit_text_input_patient_weight)
-    EditText mPatientWeightEdittext;
-    @BindView(R.id.checkbox_allergy_medicine)
-    CheckBox mMedicineAllergyCheckBox;
-    @BindView(R.id.checkbox_allergy_food)
-    CheckBox mFoodAllergyCheckBox;
-    @BindView(R.id.checkbox_other_allergy)
-    CheckBox mOtherAllergyCheckBox;
-    @BindView(R.id.edit_text_input_detail_other_allergy)
-    EditText mOtherAllergyEdittext;
-    @BindView(R.id.spinner_choose_cancer_type)
-    Spinner mChooseCancerTypeSpinner;
-    @BindView(R.id.spinner_choose_cancer_stage)
-    Spinner mChooseCancerStageSpinner;
-    @BindView(R.id.edit_text_input_detail_other_disease)
-    EditText mDetailOtherDiseaseEdittext;
-    @BindView(R.id.linearLayout_pick_image_insurance)
-    LinearLayout mPickImageInsuranceLinearLayout;
-    @BindView(R.id.image_view_first_image_insurance)
-    ImageView mFirstImageInsuranceImageView;
-    @BindView(R.id.image_view_second_image_insurance)
-    ImageView mSecondImageInsuranceImageView;
-    @BindView(R.id.button_save)
-    Button mSaveButton;
+    @BindView(R.id.edittext_profile_name)
+    EditText mProfileNameEdittext;
+    @BindView(R.id.text_view_profile_date_of_birth)
+    TextView mProfileDateOfBirthTextView;
+    @BindView(R.id.radio_group_profile_gender)
+    RadioGroup mProfileGenderRadioGroup;
+    @BindView(R.id.radio_button_profile_male)
+    RadioButton mProfileMaleRadioButton;
+    @BindView(R.id.radio_button_profile_female)
+    RadioButton mProfileFemaleRadioButton;
+    @BindView(R.id.spinner_profile_blood_type)
+    Spinner mProfileBloodTypeSpinner;
+    @BindView(R.id.edit_text_profile_height)
+    EditText mProfileHeightEdittext;
+    @BindView(R.id.edit_text_profile_weight)
+    EditText mProfileWeightEdittext;
+    @BindView(R.id.checkbox_profile_allergy_medicine)
+    CheckBox mProfileMedicineAllergyCheckBox;
+    @BindView(R.id.checkbox_profile_allergy_food)
+    CheckBox mProfileFoodAllergyCheckBox;
+    @BindView(R.id.checkbox_profile_other_allergy)
+    CheckBox mProfileOtherAllergyCheckBox;
+    @BindView(R.id.edit_text_profile_other_allergy)
+    EditText mProfileOtherAllergyEdittext;
+    @BindView(R.id.spinner_profile_cancer_type)
+    Spinner mProfileCancerTypeSpinner;
+    @BindView(R.id.spinner_profile_cancer_stage)
+    Spinner mProfileCancerStageSpinner;
+    @BindView(R.id.linearLayout_profile_pick_image_insurance)
+    LinearLayout mProfilePickImageInsuranceLinearLayout;
+    @BindView(R.id.image_view_profile_first_image_insurance)
+    ImageView mProfileFirstImageInsuranceImageView;
+    @BindView(R.id.image_view_profile_second_image_insurance)
+    ImageView mProfileSecondImageInsuranceImageView;
+    @BindView(R.id.button_profile_save)
+    Button mProfileSaveButton;
     private DatePickerDialog mDatePicker;
     private int mImageInsuranceIndex = -1;
     private File mCapturePhotoFile;
@@ -94,7 +92,7 @@ public class ProfilePatient1Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_tab1, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -114,8 +112,8 @@ public class ProfilePatient1Fragment extends Fragment {
             bloodTypeAdapter.add(string);
         }
         bloodTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mChooseBloodTypeSpinner.setAdapter(bloodTypeAdapter);
-        mChooseBloodTypeSpinner.setSelection(bloodTypeAdapter.getCount());
+        mProfileBloodTypeSpinner.setAdapter(bloodTypeAdapter);
+        mProfileBloodTypeSpinner.setSelection(bloodTypeAdapter.getCount());
 
         // setup data for spinner choose cancer stage.
         String[] stringArrayCancerStage = requireActivity().getResources().getStringArray(R.array.cancer_stage);
@@ -125,8 +123,8 @@ public class ProfilePatient1Fragment extends Fragment {
             cancerStageAdapter.add(string);
         }
         cancerStageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mChooseCancerStageSpinner.setAdapter(cancerStageAdapter);
-        mChooseCancerStageSpinner.setSelection(cancerStageAdapter.getCount());
+        mProfileCancerStageSpinner.setAdapter(cancerStageAdapter);
+        mProfileCancerStageSpinner.setSelection(cancerStageAdapter.getCount());
 
         // setup data for spinner choose cancer type.
         String[] stringArrayCancerType = requireActivity().getResources().getStringArray(R.array.fake_cancer_type);
@@ -136,11 +134,11 @@ public class ProfilePatient1Fragment extends Fragment {
             cancerTypeAdapter.add(string);
         }
         cancerTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mChooseCancerTypeSpinner.setAdapter(cancerTypeAdapter);
-        mChooseCancerTypeSpinner.setSelection(cancerTypeAdapter.getCount());
+        mProfileCancerTypeSpinner.setAdapter(cancerTypeAdapter);
+        mProfileCancerTypeSpinner.setSelection(cancerTypeAdapter.getCount());
     }
 
-    @OnClick(R.id.text_view_patient_date_of_birth)
+    @OnClick(R.id.text_view_profile_date_of_birth)
     public void onClickPickDateOfBirth() {
         final Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -148,13 +146,13 @@ public class ProfilePatient1Fragment extends Fragment {
         int year = calendar.get(Calendar.YEAR);
         // date picker dialog
         mDatePicker = new DatePickerDialog(requireActivity(),
-                (view1, year1, monthOfYear, dayOfMonth) -> mPatientDateOfBirthTextView.setText(requireActivity()
+                (view1, year1, monthOfYear, dayOfMonth) -> mProfileDateOfBirthTextView.setText(requireActivity()
                         .getResources()
                         .getString(R.string.date_of_birth_text_format, year1, monthOfYear + 1, dayOfMonth)), year, month, day);
         mDatePicker.show();
     }
 
-    @OnClick(R.id.image_view_first_image_insurance)
+    @OnClick(R.id.image_view_profile_first_image_insurance)
     public void onClickFirstImageInsurance() {
         if (!mIsFirstImageInsurancePicked) {
             showBottomSheetDialogPickImage(1);
@@ -163,7 +161,7 @@ public class ProfilePatient1Fragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.image_view_second_image_insurance)
+    @OnClick(R.id.image_view_profile_second_image_insurance)
     public void onClickSecondImageInsurance() {
         if (!mIsSecondImageInsurancePicked) {
             showBottomSheetDialogPickImage(2);
@@ -178,12 +176,12 @@ public class ProfilePatient1Fragment extends Fragment {
             mIsFirstImageInsurancePicked = true;
             mFirstImageInsurancePath = mCapturePhotoFile.getAbsolutePath();
             reduceSizeOfImage(mCapturePhotoFile.getAbsolutePath());
-            Glide.with(requireActivity()).load(mFirstImageInsurancePath).into(mFirstImageInsuranceImageView);
+            Glide.with(requireActivity()).load(mFirstImageInsurancePath).into(mProfileFirstImageInsuranceImageView);
         }
         if (requestCode == Constants.REQUEST_CODE_CAPTURE_SECOND_IMAGE_INSURANCE && resultCode == Activity.RESULT_OK) {
             mSecondImageInsurancePath = mCapturePhotoFile.getAbsolutePath();
             reduceSizeOfImage(mFirstImageInsurancePath);
-            Glide.with(requireActivity()).load(mSecondImageInsurancePath).into(mSecondImageInsuranceImageView);
+            Glide.with(requireActivity()).load(mSecondImageInsurancePath).into(mProfileSecondImageInsuranceImageView);
         }
         if (requestCode == Constants.REQUEST_CODE_TAKE_FIRST_IMAGE_INSURANCE_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getData() != null) {
@@ -193,7 +191,7 @@ public class ProfilePatient1Fragment extends Fragment {
                     if (checkImageSize(bitmapImage)) {
                         mIsFirstImageInsurancePicked = true;
                         mFirstImageInsurancePath = imageUri.getPath();
-                        Glide.with(requireActivity()).load(bitmapImage).into(mFirstImageInsuranceImageView);
+                        Glide.with(requireActivity()).load(bitmapImage).into(mProfileFirstImageInsuranceImageView);
                     } else {
                         mIsFirstImageInsurancePicked = false;
                         showDialogCantRegisterImageInsurance();
@@ -211,7 +209,7 @@ public class ProfilePatient1Fragment extends Fragment {
                     if (checkImageSize(bitmapImage)) {
                         mIsSecondImageInsurancePicked = true;
                         mSecondImageInsurancePath = imageUri.getPath();
-                        Glide.with(requireActivity()).load(bitmapImage).into(mSecondImageInsuranceImageView);
+                        Glide.with(requireActivity()).load(bitmapImage).into(mProfileSecondImageInsuranceImageView);
                     } else {
                         mIsSecondImageInsurancePicked = false;
                         showDialogCantRegisterImageInsurance();

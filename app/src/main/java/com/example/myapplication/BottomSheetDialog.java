@@ -42,7 +42,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
 
     @OnClick(R.id.button_take_picture_from_camera)
     public void onClickTakePictureFromCamera() {
-        ProfilePatient1Fragment parentFragment = ((ProfilePatient1Fragment) BottomSheetDialog.this.getParentFragment());
+        ProfileFragment parentFragment = ((ProfileFragment) BottomSheetDialog.this.getParentFragment());
         if (parentFragment != null) {
             parentFragment.takePictureFromCamera();
             dismiss();
@@ -51,7 +51,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
 
     @OnClick(R.id.button_choose_image_from_gallery)
     public void onClickTakePictureFromGallery() {
-        ProfilePatient1Fragment parentFragment = ((ProfilePatient1Fragment) BottomSheetDialog.this.getParentFragment());
+        ProfileFragment parentFragment = ((ProfileFragment) BottomSheetDialog.this.getParentFragment());
         if (parentFragment != null) {
             parentFragment.takePictureFromGallery();
             dismiss();
