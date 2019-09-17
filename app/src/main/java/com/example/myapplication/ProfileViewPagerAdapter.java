@@ -5,16 +5,18 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-public class ProfileViewPagerAdapter extends FragmentStatePagerAdapter {
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private List<Fragment> mListFragment;
 
     public ProfileViewPagerAdapter(@NonNull FragmentManager fm, Context context, List<Fragment> listFragment) {
-        super(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
         mListFragment = listFragment;
     }
@@ -38,7 +40,7 @@ public class ProfileViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return mListFragment.size();
     }
 
     @Override

@@ -20,11 +20,12 @@ import androidx.fragment.app.Fragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProfileViewFragment extends Fragment {
     @BindView(R.id.text_view_profileview_name)
     TextView mProfileViewNameTextView;
-    @BindView(R.id.text_view_profile_date_of_birth)
+    @BindView(R.id.text_view_profileview_date_of_birth)
     TextView mProfileViewDateOfBirthTextView;
     @BindView(R.id.radio_group_profileview_gender)
     RadioGroup mProfileViewGenderRadioGroup;
@@ -38,13 +39,13 @@ public class ProfileViewFragment extends Fragment {
     TextView mProfileViewHeightTextView;
     @BindView(R.id.text_view_profileview_weight)
     TextView mProfileViewWeightTextView;
-    @BindView(R.id.checkbox_profile_allergy_medicine)
+    @BindView(R.id.checkbox_profileview_allergy_medicine)
     CheckBox mProfileViewMedicineAllergyCheckBox;
-    @BindView(R.id.checkbox_profile_allergy_food)
+    @BindView(R.id.checkbox_profileview_allergy_food)
     CheckBox mProfileViewFoodAllergyCheckBox;
-    @BindView(R.id.checkbox_profile_other_allergy)
+    @BindView(R.id.checkbox_profileview_other_allergy)
     CheckBox mProfileViewOtherAllergyCheckBox;
-    @BindView(R.id.edit_text_profile_other_allergy)
+    @BindView(R.id.edit_text_profileview_other_allergy)
     TextView mProfileViewOtherAllergyTextView;
     @BindView(R.id.text_view_profileview_cancer_type)
     TextView mProfileViewCancerTypeTextView;
@@ -58,11 +59,17 @@ public class ProfileViewFragment extends Fragment {
     ImageView mProfileViewSecondImageInsuranceImageView;
     @BindView(R.id.button_profileview_edit)
     Button mProfileViewSEditButton;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_view, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @OnClick(R.id.button_profileview_edit)
+    public void showProfileEdit() {
+        ((MainActivity) requireActivity()).showProfileEdit();
     }
 }

@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         View view = inflater.inflate(R.layout.bottom_sheet_dialog, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -56,6 +54,11 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             parentFragment.takePictureFromGallery();
             dismiss();
         }
+    }
+
+    @OnClick(R.id.button_cancel)
+    public void cancelDialog() {
+        dismiss();
     }
 
 }
